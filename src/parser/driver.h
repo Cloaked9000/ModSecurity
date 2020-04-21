@@ -87,6 +87,7 @@ class Driver : public RulesSetProperties {
         const std::string& c);
 
     std::list<yy::location *> loc;
+    std::vector<std::shared_ptr<std::string>> alloced_strings;
 
     std::string buffer;
     RuleWithActions *m_lastRule;

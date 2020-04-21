@@ -316,7 +316,8 @@ using namespace modsecurity::operators;
 %initial-action
 {
   // Initialize the initial location.
-  @$.begin.filename = @$.end.filename = new std::string(driver.file);
+  driver.alloced_strings.emplace_back(std::make_shared<std::string>(driver.file));
+  @$.begin.filename = @$.end.filename = driver.alloced_strings.back().get();
 };
 %define parse.trace
 %define parse.error verbose

@@ -1248,7 +1248,8 @@ EQUALS_MINUS                            (?i:=\-)
         std::string err;
         std::string f = modsecurity::utils::find_resource(s, *driver.loc.back()->end.filename, &err);
         driver.loc.push_back(new yy::location());
-        driver.loc.back()->begin.filename = driver.loc.back()->end.filename = new std::string(f);
+        driver.alloced_strings.emplace_back(std::make_shared<std::string>(f));
+        driver.loc.back()->begin.filename = driver.loc.back()->end.filename = driver.alloced_strings.back().get();
         yyin = fopen(f.c_str(), "r" );
         if (!yyin) {
             BEGIN(INITIAL);
