@@ -18,6 +18,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "modsecurity/rules_set.h"
 #include "modsecurity/modsecurity.h"
@@ -48,36 +49,30 @@ namespace modsecurity {
  *
  */
 int RulesSet::loadFromUri(const char *uri) {
-    Driver *driver = new Driver();
+    std::unique_ptr<Driver> driver(new Driver());
 
     if (driver->parseFile(uri) == false) {
         m_parserError << driver->m_parserError.str();
-        delete driver;
         return -1;
     }
 
-    int rules = this->merge(driver);
-    delete driver;
-
+    int rules = this->merge(driver.get());
     return rules;
 }
 
 
 int RulesSet::load(const char *file, const std::string &ref) {
-    Driver *driver = new Driver();
+    std::unique_ptr<Driver> driver(new Driver());
 
     if (driver->parse(file, ref) == false) {
         m_parserError << driver->m_parserError.str();
-        delete driver;
         return -1;
     }
-    int rules = this->merge(driver);
+    int rules = this->merge(driver.get());
     if (rules == -1) {
         m_parserError << driver->m_parserError.str();
-        delete driver;
         return -1;
     }
-    delete driver;
 
     return rules;
 }

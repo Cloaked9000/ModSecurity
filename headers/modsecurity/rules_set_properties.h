@@ -200,7 +200,7 @@ class RulesSetProperties {
     RulesSetProperties(const RulesSetProperties &r) = delete;
     RulesSetProperties &operator =(const RulesSetProperties &r) = delete;
 
-    ~RulesSetProperties() {
+    virtual ~RulesSetProperties() {
         int i = 0;
 
         for (i = 0; i < modsecurity::Phases::NUMBER_OF_PHASES; i++) {

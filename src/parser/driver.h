@@ -64,7 +64,7 @@ typedef struct Driver_t Driver;
 class Driver : public RulesSetProperties {
  public:
     Driver();
-    virtual ~Driver();
+    ~Driver() override;
 
     int addSecRule(std::unique_ptr<RuleWithActions> rule);
     int addSecAction(std::unique_ptr<RuleWithActions> rule);
