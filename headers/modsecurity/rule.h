@@ -73,6 +73,9 @@ class Rule {
         m_phase(modsecurity::Phases::RequestHeadersPhase) {
         }
 
+
+    virtual ~Rule() = default;
+
     virtual bool evaluate(Transaction *transaction) = 0;
 
     virtual bool evaluate(Transaction *transaction,

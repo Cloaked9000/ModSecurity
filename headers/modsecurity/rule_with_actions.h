@@ -43,7 +43,7 @@ class RuleWithActions : public Rule {
         std::unique_ptr<std::string> fileName,
         int lineNumber);
 
-    ~RuleWithActions();
+    ~RuleWithActions() override;
 
     virtual bool evaluate(Transaction *transaction, std::shared_ptr<RuleMessage> ruleMessage) override;
 

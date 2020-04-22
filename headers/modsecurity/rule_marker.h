@@ -43,6 +43,7 @@ class RuleMarker : public Rule {
         int lineNumber)
         : Rule(std::move(fileName), lineNumber),
         m_name(std::make_shared<std::string>(name)) { }
+    ~RuleMarker() override = default;
 
 
     virtual bool evaluate(Transaction *transaction,

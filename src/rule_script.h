@@ -51,6 +51,7 @@ class RuleScript : public RuleWithActions {
         int lineNumber)
             : RuleWithActions(actions, t, std::move(fileName), lineNumber),
         m_name(name) { }
+    ~RuleScript() override = default;
 
     bool init(std::string *err);
     bool evaluate(Transaction *trans,
